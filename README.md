@@ -1,1 +1,1 @@
-# game-2026
+# csesoc-game-2026
