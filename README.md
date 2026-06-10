@@ -1,5 +1,2 @@
 # csesoc-game-2026
-
-gabriel was here - 2026
-
-tin is a stinky poo
+10/06/26 -> subcommittee has started working on it yay
