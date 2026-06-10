@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckh0owkvn118n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq4o1"]
+size = Vector2(171, 35)
+
+[node name="Codeblock" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_right = 64.0
+offset_bottom = 35.0
+text = "print(\"hullo world!\")"
+placeholder_text = "hi"
+editable = false
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(85.5, 17.5)
+shape = SubResource("RectangleShape2D_yq4o1")
