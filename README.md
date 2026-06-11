@@ -1,7 +1,7 @@
 # csesoc-game-2026
 ## logs
-10/06/26 -> subcommittee has started working on it yay
-11/06/26 -> started filling documentation for the code execution engine
+- 10/06/26 -> subcommittee has started working on it yay
+- 11/06/26 -> started filling documentation for the code execution engine
 
 ## code execution
 ### overview
@@ -67,7 +67,7 @@ tests = [
 - run_tests(tests): calls run_test on all tests given in array "tests", and returns true if all tests pass
 
 ### converter
-need to work out:
+need to communicate with tilemap team to work out:
 - how does a node communicate what type of block it is?
 - where to find the node's filled-in values
 - how is nesting represented
