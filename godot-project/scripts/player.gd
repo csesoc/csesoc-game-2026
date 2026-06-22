@@ -1,18 +1,27 @@
+class_name Player
 extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var interaction_hitbox = $Area2D
 
-var speed: float = 60
+@export var speed: float = 100
+var facingDirection: Vector2
+var facingRotation: float
+@export var HITBOX_DIST: int = 8
+
+var heldObject
+
+var interactablesInRange: Array[Interactable] = [];
+
+signal pickupObject(object)
+signal dropObject(object)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#position = Vector2(0, 0);
-	
-	# signal connects
 	interaction_hitbox.body_entered.connect(_on_interaction_enter)
 	interaction_hitbox.body_exited.connect(_on_interaction_exit)
-	pass # Replace with function body.
+	pickupObject.connect(onPickupObject)
+	dropObject.connect(onDropObject)
 
 func _physics_process(delta: float) -> void:
 	var direction = get_direction()
@@ -27,17 +36,58 @@ func _process(delta: float) -> void:
 	else:
 		animated_sprite.play("idle")
 
+	interaction_hitbox.position = HITBOX_DIST * facingDirection
+	interaction_hitbox.rotation = facingRotation
+
 func _on_interaction_enter(body: Node2D):
-	if body is not Codeblock:
+	if body is not Interactable:
 		return
 	
-	body.entered_pickup_range.emit()
-	
+	body.enteredTnteractRange.emit()
+	interactablesInRange.append(body)
+
 func _on_interaction_exit(body: Node2D):
-	if body is not Codeblock:
+	if body is not Interactable:
 		return
 	
-	body.exited_pickup_range.emit()
+	body.exitedInteractRange.emit()
+	interactablesInRange.erase(body)
+
+# input handler
+func _input(event: InputEvent):
+	if event.is_action_pressed("move left"):
+		facingDirection = Vector2(-1, 0)
+		facingRotation = deg_to_rad(-90)
+		
+	if event.is_action_pressed("move right"):
+		facingDirection = Vector2(1, 0)
+		facingRotation = deg_to_rad(90)
+		
+	if event.is_action_pressed("move up"):
+		facingDirection = Vector2(0, -1)
+		facingRotation = deg_to_rad(180)
+		
+	if event.is_action_pressed("move down"):
+		facingDirection = Vector2(0, 1)
+		facingRotation = deg_to_rad(0)
+		
+	if event.is_action_pressed("primary interact"):
+		if heldObject != null:
+			heldObject.playerInteract.emit(self)
+			return
+		
+		for interactable in interactablesInRange:
+			interactable.playerInteract.emit(self)
+			
+func onPickupObject(object: Node2D):
+	object.position = Vector2(0, -20)
+	add_child(object)
+	heldObject = object
+
+func onDropObject(object):
+	remove_child(object)
+	object.position = position + facingDirection * HITBOX_DIST
+	heldObject = null
 
 # HELPERS
 # =============================================================================

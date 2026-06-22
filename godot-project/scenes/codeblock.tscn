@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckh0owkvn118n"]
+[gd_scene load_steps=4 format=3 uid="uid://ckh0owkvn118n"]
 
-[ext_resource type="Script" uid="uid://qttdfbhyd77h" path="res://scripts/codeblock.gd" id="1_wmxlj"]
+[ext_resource type="Script" uid="uid://qttdfbhyd77h" path="res://scripts/worldObjects/Codeblock.gd" id="1_wmxlj"]
+[ext_resource type="Script" uid="uid://b83bksvwk3gsh" path="res://scripts/worldObjects/PlayerPickupComponent.gd" id="2_f8vr4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yq4o1"]
 size = Vector2(171, 35)
@@ -9,8 +10,10 @@ size = Vector2(171, 35)
 script = ExtResource("1_wmxlj")
 
 [node name="TextEdit" type="TextEdit" parent="."]
-offset_right = 64.0
-offset_bottom = 35.0
+offset_left = -86.0
+offset_top = -17.0
+offset_right = 86.0
+offset_bottom = 18.0
 text = "print(\"hullo world!\")"
 placeholder_text = "hi"
 editable = false
@@ -18,5 +21,7 @@ scroll_fit_content_height = true
 scroll_fit_content_width = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(85.5, 17.5)
 shape = SubResource("RectangleShape2D_yq4o1")
+
+[node name="PlayerPickupComponent" type="Node2D" parent="."]
+script = ExtResource("2_f8vr4")
