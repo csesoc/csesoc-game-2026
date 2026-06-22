@@ -59,16 +59,16 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
 animation = &"idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g2els")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="."]
 position = Vector2(0, 8)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="InteractionHitbox" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_qhqgy")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+[node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
 visible = false
 position = Vector2(0, 8.940697e-08)
 scale = Vector2(0.09190708, -0.058290184)

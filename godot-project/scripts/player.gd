@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var interaction_hitbox = $Area2D
+@onready var interaction_hitbox = $InteractionArea
 
 @export var speed: float = 100
 var facingDirection: Vector2
@@ -83,11 +83,13 @@ func onPickupObject(object: Node2D):
 	object.position = Vector2(0, -20)
 	add_child(object)
 	heldObject = object
+	speed = 50
 
 func onDropObject(object):
 	remove_child(object)
-	object.position = position + facingDirection * HITBOX_DIST
+	object.position = position + facingDirection * 20
 	heldObject = null
+	speed = 100
 
 # HELPERS
 # =============================================================================
