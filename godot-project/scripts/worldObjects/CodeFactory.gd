@@ -27,6 +27,7 @@ func onPlayerInteract(player: Player):
 		pickupComponent.getDropped(player)
 	else:
 		pickupComponent.getPickedUp(player)
+		player.speed = 200
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
