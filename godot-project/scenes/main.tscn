@@ -1,20 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://crtdrdtdqf72h"]
+[gd_scene load_steps=5 format=3 uid="uid://crtdrdtdqf72h"]
 
 [ext_resource type="PackedScene" uid="uid://ckh0owkvn118n" path="res://scenes/codeblock.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://df3pumbvbb8h0" path="res://scenes/player.tscn" id="2_0wfyh"]
+[ext_resource type="TileSet" path="res://scenes/tileset.tres" id="3_tset"]
+[ext_resource type="Script" path="res://scripts/tilemap.gd" id="4_tmap"]
 
 [node name="main" type="Node2D"]
 texture_filter = 1
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["tilemap"]]
+tile_set = ExtResource("3_tset")
+script = ExtResource("4_tmap")
 
 [node name="player" parent="." instance=ExtResource("2_0wfyh")]
 position = Vector2(-188, -74)
 
 [node name="codeblock" parent="." instance=ExtResource("1_o5qli")]
-position = Vector2(-128, -76)
+position = Vector2(-128, -96)
 linear_damp = 1.0
 
 [node name="codeblock2" parent="." instance=ExtResource("1_o5qli")]
-position = Vector2(-128, -76)
+position = Vector2(-128, 16)
 linear_damp = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]

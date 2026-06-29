@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://ckh0owkvn118n"]
+[gd_scene load_steps=3 format=3 uid="uid://ckh0owkvn118n"]
+
+[ext_resource type="Script" path="res://scripts/codeblock.gd" id="1_cblk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yq4o1"]
 size = Vector2(171, 35)
@@ -6,10 +8,12 @@ size = Vector2(171, 35)
 [node name="Codeblock" type="RigidBody2D" unique_id=861031626]
 gravity_scale = 0.0
 lock_rotation = true
+script = ExtResource("1_cblk")
 
 [node name="TextEdit" type="TextEdit" parent="." unique_id=1390230067]
 offset_right = 64.0
 offset_bottom = 35.0
+mouse_filter = 2
 text = "print(\"hullo world!\")"
 placeholder_text = "hi"
 editable = false
