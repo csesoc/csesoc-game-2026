@@ -20,36 +20,7 @@ func run(node):
 		return
 
 	match block_type:
-		# printf("42"):
-		# {
-			"type": "printf",
-			"value": 42
-		}
-
-		# printf("%d," i):
-		# {
-			"type": "printf",
-			"value": {
-				"type": "variable",
-				"name": "i"
-			}
-		}
-
-		# printf("%d", i + 5)
-		# {
-			"type": "printf"
-			"value": {
-				"type": "math",
-				"operation": "+",
-				"left": {
-					"type": "variable",
-					"name": "i"
-				},
-				"right": "5"
-			}
-		}
-
-		"printf":
+		"print":
 			var value = node.get("value")
 			if value == null:
 				output.append("ERROR: print block missing value")
@@ -60,4 +31,4 @@ func run(node):
 
 func evaluate(value):
 	# TODO: handle variables, math expressions, and comparisons
-	return values
+	return value
