@@ -6,11 +6,9 @@
 ## code execution
 ### overview
 player arranges blocks (visual nodes) 
---> conversion --> intermediate representation (IR): Godot Dictionary
+--> conversion --> intermediate representation (IR): Godot object
 --> interpreter reads the IR and executes the code --> stores output
 --> test runner compares the output to expected output --> returns PASS/FAIL
-
-TODO: handling syntax/compilation errors, storing data other than variables, input-reading statements
 
 ### intermediate representation
 stores programs as an array of statements, each statement being represented as a dictionary. two types of statements:
@@ -67,7 +65,7 @@ tests = [
 - run_tests(tests): calls run_test on all tests given in array "tests", and returns true if all tests pass
 
 ### converter
-need to communicate with tilemap team to work out:
+converts visual code blocks into Godot objects for the interpreter. will catch syntax errors (functions as a compiler). need to communicate with tilemap team to work out:
 - how does a node communicate what type of block it is?
 - where to find the node's filled-in values
 - how is nesting represented
