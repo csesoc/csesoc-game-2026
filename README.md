@@ -2,6 +2,7 @@
 ## logs
 - 10/06/26 -> subcommittee has started working on it yay
 - 11/06/26 -> started filling documentation for the code execution engine
+- 01/07/26 -> created the skeleton of the interpreter and made a prototype of a print block
 
 ## code execution
 ### overview
@@ -15,23 +16,40 @@ stores programs as an array of statements, each statement being represented as a
 - run (action being executed)
 - evaluate (math expression or true/false condition)
 
-example program:
+#### blocks reference
+printing:
 ```gdscript
-[
+    printf("42"):
     {
-        "type": "for",
-        "var": "i",
-        "from": 1,
-        "to": 5,
-        "body": [
-            { "type": "print", "value": { "type": "variable", "name": "i" } }
-        ]
+        "type": "printf",
+        "value": 42
     }
-]
+
+    printf("%d," i):
+    {
+        "type": "printf",
+        "value": {
+            "type": "variable",
+            "name": "i"
+        }
+    }
+
+    printf("%d", i + 5)
+    {
+        "type": "printf"
+        "value": {
+            "type": "math",
+            "operation": "+",
+            "left": {
+                "type": "variable",
+                "name": "i"
+            },
+            "right": "5"
+        }
+    }
 ```
 
-#### blocks reference
-TODO (run): print, set, for/while, if/else/elif
+TODO (run): set a variable, for/while, if/else/else-if
 TODO (eval): literal, variable, math, compare
 
 ### interpreter
