@@ -16,27 +16,31 @@ stores programs as an array of statements, each statement being represented as a
 - run (action being executed)
 - evaluate (math expression or true/false condition)
 
-#### blocks reference
-printing:
+#### block prototypes
+##### printing
+printing a literal (e.g. the integer 42):
 ```gdscript
-    printf("42"):
     {
-        "type": "printf",
+        "type": "print",
         "value": 42
     }
+```
 
-    printf("%d," i):
+printing a variable:
+```gdscript
     {
-        "type": "printf",
+        "type": "print",
         "value": {
             "type": "variable",
             "name": "i"
         }
     }
+```
 
-    printf("%d", i + 5)
+printing an expression
+```gdscript
     {
-        "type": "printf"
+        "type": "print"
         "value": {
             "type": "math",
             "operation": "+",
