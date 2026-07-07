@@ -29,6 +29,27 @@ func run(node):
         
         # TODO: other block types
 
+		"if":
+			var condition = node.get("condition")
+			if condition == null:
+				output.append("ERROR: if block missing condition")
+				return
+
+			if evaluate(condition):
+				for statement in node.get("body", []):
+					run(statement)
+
+			else:
+				var else_branch = node.get("else")
+				if else_branch == null:
+					return
+				if else_branch is Array:
+					for statement in else_branch:
+						run(statement)
+				else: 
+					run(else_branch)
+
+
 func evaluate(value):
 	# TODO: handle variables, math expressions, and comparisons
 	return value

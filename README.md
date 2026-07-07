@@ -53,12 +53,90 @@ printing an expression
     }
 ```
 
+if statement
+```gdscript
+    {
+        "type": "if",
+        "condition": {
+            "type": "compare",
+            "operation": "==",
+            "left": {
+                "type": "variable:,
+                "name": "i"
+            },
+            "right": 5
+        },
+        "body": [
+            {"type": "print", "value": 100}
+        ]
+    }
+```
+
+if/else statement
+```gdscript
+    {
+        "type": "if",
+        "condition": {
+            "type": "compare",
+            "operation": "==",
+            "left": {
+                "type": "variable:,
+                "name": "i"
+            },
+            "right": 5
+        },
+        "body": [
+            {"type": "print", "value": 100}
+        ],
+        "else": [
+            {"type": "print", "value": 0}
+        ]
+    }
+```
+
+if/else/else-if
+```gdscript
+    {
+        "type": "if",
+        "condition": {
+            "type": "compare",
+            "operation": "==",
+            "left": {
+                "type": "variable",
+                "name": "i"
+            },
+            "right": 5
+        },
+        "body": [
+            {"type": "print", "value": 100}
+        ],
+        "else": {
+            "type": "if",
+            "condition": {
+                "type": "compare",
+                "operation": "==",
+                "left": {
+                    "type": "variable:,
+                    "name": "i"
+                },
+                "right": 5
+            },
+            "body": [
+                {"type": "print", "value": 100}
+            ],
+            "else": [
+                {"type": "print", "value": 0}
+            ]
+        }
+    }
+```
+
 TODO (run): set a variable, for/while, if/else/else-if
 TODO (eval): literal, variable, math, compare
 
 ### interpreter
 #### core state
-- variables: a dictionary of variables mapping name to value
+- variables: a dict"ionary of variables mapping name to value
 - output: an array storing everything printed by the program, in order
 - steps: the number of operations that have been run
 - step limit: the maximum number of allowable operations
