@@ -92,6 +92,7 @@ if/else statement
             {"type": "print", "value": 0}
         ]
     }
+```
 
 if/else/else-if
 ```gdscript
@@ -101,7 +102,7 @@ if/else/else-if
             "type": "compare",
             "operation": "==",
             "left": {
-                "type": "variable:,
+                "type": "variable",
                 "name": "i"
             },
             "right": 5
