@@ -51,5 +51,48 @@ func run(node):
 
 
 func evaluate(value):
-	# TODO: handle variables, math expressions, and comparisons
-	return value
+	# comparisons
+	if not (value is Dictionary):
+		return value
+
+	var value_type = value.get("type")
+
+	match value_type:
+		"variable":
+			var var_name = value.get("name")
+			if var_name == null:
+				output.append("ERROR: variable block missing name")
+				return null
+			if not variables.has(var_name):
+				output.append("ERROR: undefined variable '%s'" % var_name)
+				return null
+			return variables[var_name]
+
+		"math":
+			var operation = value.get("operation")
+			if operation == null:
+				output.append("ERROR: math block missing operation")
+				return null
+
+			var left = evaluate(value.get("left"))
+			var right = evaluate(value.get("right"))
+
+			match operation:
+				"+":
+					return left + right
+				"-":
+					return left - right
+				"*":
+					return left * right
+				"/":
+					if right == 0:
+						output.append("ERROR: division by zero")
+						return null
+					return left / right
+				_:
+					output.append("ERROR: unknown math operation '%s'" % operation)
+					return null
+
+		_:
+			output.append("ERROR: unknown evaluate type '%s'" % str(value_type))
+			return null
