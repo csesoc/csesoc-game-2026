@@ -89,6 +89,11 @@ func evaluate(value):
 						output.append("ERROR: division by zero")
 						return null
 					return left / right
+				"%":
+            		if right == 0:
+                		output.append("ERROR: modulo by zero")
+                		return null
+            		return left % right
 				_:
 					output.append("ERROR: unknown math operation '%s'" % operation)
 					return null
