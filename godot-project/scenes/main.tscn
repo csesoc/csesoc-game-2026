@@ -1,22 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://crtdrdtdqf72h"]
+[gd_scene format=3 uid="uid://crtdrdtdqf72h"]
 
 [ext_resource type="PackedScene" uid="uid://ckh0owkvn118n" path="res://scenes/codeblock.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://df3pumbvbb8h0" path="res://scenes/player.tscn" id="2_0wfyh"]
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" unique_id=514686256]
 texture_filter = 1
 
-[node name="player" parent="." instance=ExtResource("2_0wfyh")]
+[node name="player" parent="." unique_id=1270994352 instance=ExtResource("2_0wfyh")]
 position = Vector2(-188, -74)
 
-[node name="codeblock" parent="." instance=ExtResource("1_o5qli")]
+[node name="codeblock" parent="." unique_id=340190487 instance=ExtResource("1_o5qli")]
 position = Vector2(-128, -76)
 linear_damp = 1.0
 
-[node name="codeblock2" parent="." instance=ExtResource("1_o5qli")]
+[node name="codeblock2" parent="." unique_id=448634502 instance=ExtResource("1_o5qli")]
 position = Vector2(-128, -76)
 linear_damp = 1.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=382333015]
 position = Vector2(-2, -1)
 zoom = Vector2(2, 2)
