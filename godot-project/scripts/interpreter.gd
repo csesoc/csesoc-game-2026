@@ -93,9 +93,6 @@ func evaluate(value):
 				_:
 					output.append("ERROR: unknown math operation '%s'" % operation)
 					return null
-
-		_:
-			output.append("ERROR: unknown evaluate type '%s'" % str(value_type))
 		"compare":
 			var operation = value.get("operation")
 			if operation == null:
@@ -133,6 +130,8 @@ func evaluate(value):
 				"and": return left and right
 				"or": return left or right
 				_:
-					output.append("ERROR: unknown logic operation '%s'" % operation)
+					output.append("ERROR: unknown evaluate type '%s'" % operation)
 					return null
+		_:
+			output.append("ERROR: unknown evaluate type '%s'" % str(value_type))
 			return null
