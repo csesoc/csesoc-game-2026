@@ -26,8 +26,8 @@ func run(node):
 				output.append("ERROR: print block missing value")
 				return
 			output.append(evaluate(value))
-        
-        # TODO: other block types
+		
+		# TODO: other block types
 
 		"if":
 			var condition = node.get("condition")
@@ -49,9 +49,10 @@ func run(node):
 				else: 
 					run(else_branch)
 
-
+# Takes in a condition 
+# Update README.md to show an example of compound conditional statements
 func evaluate(value):
-	# comparisons
+	
 	if not (value is Dictionary):
 		return value
 
@@ -80,7 +81,6 @@ func evaluate(value):
 			if left == null or right == null:
 				return null
 
-
 			match operation:
 				"+":
 					return left + right
@@ -101,7 +101,45 @@ func evaluate(value):
 				_:
 					output.append("ERROR: unknown math operation '%s'" % operation)
 					return null
-
+		"compare":
+			var operation = value.get("operation")
+			if operation == null:
+				output.append("ERROR: compare block missing operation")
+				return null
+			var left = evaluate(value.get("left"))
+			var right = evaluate(value.get("right"))
+			if left == null or right == null:
+				return null
+			match operation:
+				">": return left > right
+				"<": return left < right
+				">=": return left >= right
+				"<=": return left <= right
+				"==": return left == right
+				"!=": return left != right
+				_:
+					output.append("ERROR: unknown comparison '%s'" % operation)
+					return null
+		"logic":
+			var operation = value.get("operation")
+			if operation == null:
+				output.append("ERROR: logic block missing operation")
+				return null
+			var left = evaluate(value.get("left"))
+			if left == null:
+				# no error message append because recursive call already did it
+				return null
+			if operation == "not":
+				return not left
+			var right = evaluate(value.get("right"))
+			if right == null:
+				return null
+			match operation:
+				"and": return left and right
+				"or": return left or right
+				_:
+					output.append("ERROR: unknown evaluate type '%s'" % operation)
+					return null
 		_:
 			output.append("ERROR: unknown evaluate type '%s'" % str(value_type))
 			return null
