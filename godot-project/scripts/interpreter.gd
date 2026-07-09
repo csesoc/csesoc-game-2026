@@ -52,7 +52,7 @@ func run(node):
 # Takes in a condition 
 # Update README.md to show an example of compound conditional statements
 func evaluate(value):
-	# comparisons
+	
 	if not (value is Dictionary):
 		return value
 
@@ -78,6 +78,9 @@ func evaluate(value):
 			var left = evaluate(value.get("left"))
 			var right = evaluate(value.get("right"))
 
+			if left == null or right == null:
+				return null
+
 			match operation:
 				"+":
 					return left + right
@@ -90,6 +93,11 @@ func evaluate(value):
 						output.append("ERROR: division by zero")
 						return null
 					return left / right
+				"%":
+            		if right == 0:
+                		output.append("ERROR: modulo by zero")
+                		return null
+            		return left % right
 				_:
 					output.append("ERROR: unknown math operation '%s'" % operation)
 					return null
