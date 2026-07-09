@@ -77,6 +77,10 @@ func evaluate(value):
 			var left = evaluate(value.get("left"))
 			var right = evaluate(value.get("right"))
 
+			if left == null or right == null:
+				return null
+
+
 			match operation:
 				"+":
 					return left + right
