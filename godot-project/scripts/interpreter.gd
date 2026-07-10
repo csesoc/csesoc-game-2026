@@ -4,9 +4,13 @@ extends Node
 var variables = {}
 var output = []
 
+var steps = 0
+var step_limit = 1000
+
 func reset():
 	variables = {}
 	output = []
+	steps = 0
 
 func run_program(program):
 	reset()
@@ -46,13 +50,61 @@ func run(node):
 				if else_branch is Array:
 					for statement in else_branch:
 						run(statement)
-				else: 
+				else:
 					run(else_branch)
+		
+		"set":
+			var var_name = node.get("name")
+			if var_name == null:
+				output.append("ERROR: set block missing variable name")
+				return
+			if not node.has("value"):
+				output.append("ERROR: set block missing value")
+				return
+			var value = evaluate(node.get("value"))
+			if value == null:
+				return
+			variables[var_name] = value
+		
+		"while":
+			if not node.has("condition"):
+				output.append("ERROR: while block missing condition")
+				return
+
+			var body = node.get("body", [])
+
+			if not (body is Array):
+				output.append("ERROR: while block body must be an array")
+				return
+
+			while true:
+				steps += 1
+
+				if steps > step_limit:
+					output.append("ERROR: step limit exceeded")
+					return
+
+				var condition = evaluate(node.get("condition"))
+
+				if condition == null:
+					return
+
+				if not (condition is bool):
+					output.append(
+						"ERROR: while condition must evaluate to true or false"
+					)
+					return
+
+				if not condition:
+					break
+
+				for statement in body:
+					run(statement)
+		
 
 # Takes in a condition 
 # Update README.md to show an example of compound conditional statements
 func evaluate(value):
-	
 	if not (value is Dictionary):
 		return value
 
@@ -94,10 +146,10 @@ func evaluate(value):
 						return null
 					return left / right
 				"%":
-            		if right == 0:
-                		output.append("ERROR: modulo by zero")
-                		return null
-            		return left % right
+					if right == 0:
+						output.append("ERROR: modulo by zero")
+						return null
+					return left % right
 				_:
 					output.append("ERROR: unknown math operation '%s'" % operation)
 					return null
