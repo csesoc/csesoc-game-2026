@@ -52,6 +52,14 @@ printing an expression
         }
     }
 ```
+Setting a variable
+```gdscript
+    {
+        "type": "set",
+        "name": "score",
+        "value": 10
+    }
+```
 
 if statement
 ```gdscript
@@ -130,6 +138,22 @@ if/else/else-if
         }
     }
 ```
+While loop
+```gdscript
+{
+	"type": "while",
+	"condition": {
+		"type": "compare",
+		"operation": "<",
+		"left": {
+			"type": "variable",
+			"name": "x"
+		},
+		"right": 5
+	},
+	"body": []
+}
+```
 
 TODO (run): set a variable, for/while, if/else/else-if
 TODO (eval): literal, variable, math, compare
@@ -145,6 +169,7 @@ TODO (eval): literal, variable, math, compare
 - reset(): resets all variables so that the state of the last test case does not leak and influence the state of the next
 - run(node): executes one statement by looking at node["type"] and performing that action. calls itself on each 'child' (each element in node["body"] to allow nesting)
 - evaluate(value): returns a value given an expression. if the value is a number or string, return it as is. otherwise, either a math operation or a comparison will be passed in, so the function will either evaluate the operation or return true/false, respectively
+
 
 ### testing
 note: should handle failures gracefully (i.e. infinite loops, division by 0, etc... should not cause the game to crash)
