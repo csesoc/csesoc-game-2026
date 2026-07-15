@@ -18,6 +18,10 @@ config/name="csesoc game 2026"
 run/main_scene="uid://crtdrdtdqf72h"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[dotnet]
+
+project/assembly_name="csesoc game 2026"
+
 [input]
 
 "move left"={

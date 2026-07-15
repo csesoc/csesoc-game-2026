@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqragqvnyuyvh"]
+[gd_scene format=3 uid="uid://cqragqvnyuyvh"]
 
 [ext_resource type="Script" uid="uid://bgjnhjrasjiuj" path="res://scripts/worldObjects/Whitebag.gd" id="1_3i7aa"]
 [ext_resource type="Script" uid="uid://b83bksvwk3gsh" path="res://scripts/worldObjects/PlayerPickupComponent.gd" id="2_tjagi"]
