@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://df3pumbvbb8h0"]
+[gd_scene format=3 uid="uid://df3pumbvbb8h0"]
 
 [ext_resource type="Texture2D" uid="uid://cnv5mgt17h0yw" path="res://assets/blocked-character-walk.png" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://cimw3ngq52vw3" path="res://scripts/Player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://cimw3ngq52vw3" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dn0vj30qhbn" path="res://assets/idk.png" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
@@ -50,29 +50,29 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(18, 11.734375)
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" unique_id=1590447673]
 script = ExtResource("1_g2els")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1810400679]
 texture_filter = 1
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
 animation = &"idle"
 
-[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
+[node name="PlayerHitbox" type="CollisionShape2D" parent="." unique_id=692980092]
 shape = SubResource("RectangleShape2D_g2els")
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." unique_id=392087661]
 position = Vector2(0, 8)
 
-[node name="InteractionHitbox" type="CollisionShape2D" parent="InteractionArea"]
+[node name="InteractionHitbox" type="CollisionShape2D" parent="InteractionArea" unique_id=990233892]
 shape = SubResource("RectangleShape2D_qhqgy")
 
-[node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
+[node name="Sprite2D" type="Sprite2D" parent="InteractionArea" unique_id=800186778]
 visible = false
 position = Vector2(0, 8.940697e-08)
 scale = Vector2(0.09190708, -0.058290184)
 texture = ExtResource("3_qhqgy")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=133789619]
 zoom = Vector2(3, 3)

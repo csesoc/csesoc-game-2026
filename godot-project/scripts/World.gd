@@ -4,6 +4,7 @@ extends Node2D
 
 @export var playerScene: PackedScene
 @export var blockScene: PackedScene
+@export var factoryScene: PackedScene
 
 var players: Array[Player] = []
 var blocks: Array[Codeblock] = []
@@ -15,6 +16,10 @@ func _ready() -> void:
 	#var player = playerScene.instantiate()
 	#players.append(player)
 	#add_child(player)
+	
+	var factory = factoryScene.instantiate()
+	factory.position += Vector2(200, -100)
+	add_child(factory)
 	
 	# add blocks
 	for i in range(2):

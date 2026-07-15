@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cyqqujrqyibxl"]
+
+[ext_resource type="Script" uid="uid://bkdsbcxj4bcb3" path="res://scripts/worldObjects/CodeFactory.gd" id="1_io6sf"]
+[ext_resource type="PackedScene" uid="uid://ckh0owkvn118n" path="res://scenes/codeblock.tscn" id="2_0cv4y"]
+[ext_resource type="Script" uid="uid://b83bksvwk3gsh" path="res://scripts/worldObjects/PlayerPickupComponent.gd" id="2_bpssy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq4o1"]
+size = Vector2(171, 131.125)
+
+[node name="Codefactory" type="StaticBody2D" unique_id=234468239]
+script = ExtResource("1_io6sf")
+blockScene = ExtResource("2_0cv4y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1554757667]
+position = Vector2(0, 6.4375)
+shape = SubResource("RectangleShape2D_yq4o1")
+
+[node name="PlayerPickupComponent" type="Node2D" parent="." unique_id=282065732]
+script = ExtResource("2_bpssy")
+
+[node name="TextEdit" type="TextEdit" parent="." unique_id=141631934]
+offset_left = -86.0
+offset_top = -60.0
+offset_right = 85.0
+offset_bottom = 71.0
+text = "THIS IS A FACTORY!!!"
+placeholder_text = "factory"
