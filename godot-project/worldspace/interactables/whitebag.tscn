@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqcxrnxmp6oxq"]
+
+[ext_resource type="Script" uid="uid://b83bksvwk3gsh" path="res://worldspace/interactables/PlayerPickupComponent.gd" id="1_dpsdm"]
+[ext_resource type="Texture2D" uid="uid://5odkgfxet7bo" path="res://assets/whitebag.png" id="2_83rrp"]
+
+[sub_resource type="GDScript" id="GDScript_n2d8o"]
+script/source = "# Whitebag.gd
+class_name Whitebag
+extends Interactable
+
+@onready var pickupComponent: PlayerPickupComponent = $PlayerPickupComponent
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	super()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func onPlayerInteract(player: Player):
+	if pickupComponent.isPlayerAttached():
+		pickupComponent.getDropped(player)
+	else:
+		pickupComponent.getPickedUp(player)
+
+func onEnterInteractRange():
+	#textBlock.text = \"i am in range\"
+	pass
+
+func onExitInteractRange():
+	pass
+	#textBlock.text = \"i am no longer in range\"
+"
+
+[node name="Whitebag" type="Node2D"]
+script = SubResource("GDScript_n2d8o")
+
+[node name="PlayerPickupComponent" type="Node2D" parent="."]
+script = ExtResource("1_dpsdm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.16206557, 0.1620656, 0.16206554, 1)
+texture = ExtResource("2_83rrp")
