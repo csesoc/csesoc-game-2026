@@ -30,6 +30,7 @@ func join_game(address: String) -> void:
 	multiplayer.connected_to_server.connect(func(): print("Connected to server!"))
 	print("Joining ", address, ":", PORT)
 
+# spawns player when either creating or joining a lobby
 func _on_peer_connected(id: int) -> void:
 	if multiplayer.is_server():
 		World.getWorld().add_player(id)

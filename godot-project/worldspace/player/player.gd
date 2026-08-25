@@ -82,21 +82,22 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("primary interact"):
 		if heldObject != null:
 			#heldObject.playerInteract.emit(self)
-			request_drop.rpc(heldObject.get_path())
+			request_interaction.rpc(heldObject.get_path())
 			return
 		
 		for interactable in interactablesInRange:
-			request_pickup.rpc(interactable.get_path())
+			request_interaction.rpc(interactable.get_path())
 			
+# all interactions are sent through rpc to sync with all players
 @rpc("any_peer", "call_local", "reliable")
-func request_pickup(object_path: NodePath) -> void:
+func request_interaction(object_path: NodePath) -> void:
 	var interactable = get_node(object_path)
 	interactable.playerInteract.emit(self)
 
-@rpc("any_peer", "call_local", "reliable")
-func request_drop(object_path: NodePath) -> void:
-	var object = get_node(object_path)
-	object.playerInteract.emit(self)
+#@rpc("any_peer", "call_local", "reliable")
+#func request_drop(object_path: NodePath) -> void:
+	#var object = get_node(object_path)
+	#object.playerInteract.emit(self)
 			
 func onPickupObject(object: Node2D):
 	object.position = Vector2(0, -20)

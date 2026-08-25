@@ -8,7 +8,7 @@ extends Node2D
 
 @onready var spawner: MultiplayerSpawner = $MultiplayerSpawner
 
-var players: Dictionary = {}   # FIX: was Array[Player], now keyed by peer id
+var players: Dictionary = {}
 var blocks: Array[Codeblock] = []
 static var world
 
@@ -44,7 +44,7 @@ func remove_player(id: int) -> void:
 	if players.has(id):
 		players[id].queue_free()
 		players.erase(id)
-		
+
 func _spawn_player(id: int) -> Node:
 	var player: Player = playerScene.instantiate()
 	player.name = str(id)
