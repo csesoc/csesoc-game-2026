@@ -9,14 +9,17 @@ signal playerInteract(player: Player)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	enteredTnteractRange.connect(onEnterInteractRange)
-	exitedInteractRange.connect(onExitInteractRange)
-	playerInteract.connect(onPlayerInteract)
+    enteredTnteractRange.connect(onEnterInteractRange)
+    exitedInteractRange.connect(onExitInteractRange)
+    playerInteract.connect(onPlayerInteract)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+    pass
 
 @abstract func onPlayerInteract(player: Player)
-@abstract func onEnterInteractRange()
-@abstract func onExitInteractRange()
+func onEnterInteractRange():
+    pass
+
+func onExitInteractRange():
+    pass

@@ -1,4 +1,5 @@
 # Codeblock.gd
+@abstract
 class_name Codeblock
 extends Interactable
 
@@ -13,7 +14,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+@abstract func runCode()
 
+# pickup functionality
 func onPickup():
 	scale /= 2
 	collisionShape.call_deferred("disabled", true)
@@ -27,11 +31,3 @@ func onPlayerInteract(player: Player):
 		pickupComponent.getDropped(player)
 	else:
 		pickupComponent.getPickedUp(player)
-
-func onEnterInteractRange():
-	#textBlock.text = "i am in range"
-	pass
-
-func onExitInteractRange():
-	pass
-	#textBlock.text = "i am no longer in range"
