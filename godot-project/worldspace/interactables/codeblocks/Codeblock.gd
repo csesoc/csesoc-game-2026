@@ -15,7 +15,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-@abstract func runCode()
+@abstract func runCode(interpreter: Interpreter) -> void
 
 # pickup functionality
 func onPickup():
