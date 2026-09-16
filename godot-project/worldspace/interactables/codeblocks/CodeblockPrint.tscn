@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://iwajr71ge6l2"]
+
+[ext_resource type="PackedScene" uid="uid://ckh0owkvn118n" path="res://worldspace/interactables/codeblocks/Codeblock.tscn" id="1_1jw7d"]
+[ext_resource type="Script" uid="uid://clusmtmmo0u10" path="res://worldspace/interactables/codeblocks/CodeblockPrint.gd" id="2_a8gfb"]
+
+[node name="Codeblock" unique_id=2110746740 instance=ExtResource("1_1jw7d")]
+script = ExtResource("2_a8gfb")
