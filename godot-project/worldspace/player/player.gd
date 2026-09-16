@@ -3,10 +3,11 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var interaction_hitbox = $InteractionArea
+@onready var camera: Camera2D = $Camera2D
 
 @export var speed: float = 100
-var facingDirection: Vector2
-var facingRotation: float
+@export var facingDirection: Vector2 = Vector2(0, 1)
+@export var facingRotation: float
 @export var HITBOX_DIST: int = 8
 
 var heldObject
@@ -22,6 +23,11 @@ func _ready() -> void:
 	interaction_hitbox.body_exited.connect(_on_interaction_exit)
 	pickupObject.connect(onPickupObject)
 	dropObject.connect(onDropObject)
+	
+	set_physics_process(is_multiplayer_authority())
+	set_process_input(is_multiplayer_authority())
+	
+	camera.enabled = is_multiplayer_authority()
 
 func _physics_process(delta: float) -> void:
 	var direction = get_direction()
@@ -40,6 +46,8 @@ func _process(delta: float) -> void:
 	interaction_hitbox.rotation = facingRotation
 
 func _on_interaction_enter(body: Node2D):
+	if not is_multiplayer_authority():
+		return
 	if body is not Interactable:
 		return
 	
@@ -73,11 +81,23 @@ func _input(event: InputEvent):
 		
 	if event.is_action_pressed("primary interact"):
 		if heldObject != null:
-			heldObject.playerInteract.emit(self)
+			#heldObject.playerInteract.emit(self)
+			request_interaction.rpc(heldObject.get_path())
 			return
 		
 		for interactable in interactablesInRange:
-			interactable.playerInteract.emit(self)
+			request_interaction.rpc(interactable.get_path())
+			
+# all interactions are sent through rpc to sync with all players
+@rpc("any_peer", "call_local", "reliable")
+func request_interaction(object_path: NodePath) -> void:
+	var interactable = get_node(object_path)
+	interactable.playerInteract.emit(self)
+
+#@rpc("any_peer", "call_local", "reliable")
+#func request_drop(object_path: NodePath) -> void:
+	#var object = get_node(object_path)
+	#object.playerInteract.emit(self)
 			
 func onPickupObject(object: Node2D):
 	object.position = Vector2(0, -20)
@@ -86,10 +106,13 @@ func onPickupObject(object: Node2D):
 	speed = 50
 
 func onDropObject(object):
+	if object == null:
+		return
 	remove_child(object)
 	object.position = position + facingDirection * 20
 	heldObject = null
 	speed = 100
+
 
 # HELPERS
 # =============================================================================
