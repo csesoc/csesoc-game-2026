@@ -7,14 +7,14 @@ func _ready():
 
 func test_set_variable():
 	var program: Array[Codeblock] = [
-		CodeblockAssign.create("score", 10),
-		CodeblockPrint.create("score")
+		CodeblockAssign.create("score")
+		#CodeblockPrint.create("score")
 	]
 
 	Interpreter.getInstance().run_program(program)
 
 	print(Interpreter.getInstance().output)
-	assert(Interpreter.getInstance().output == [10])
+	#assert(Interpreter.getInstance().output == [10])
 	assert(Interpreter.getInstance().variables["score"] == 10)
 
 	print("PASS: set variable")

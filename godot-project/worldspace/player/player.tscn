@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://df3pumbvbb8h0"]
+[gd_scene format=3 uid="uid://df3pumbvbb8h0"]
 
 [ext_resource type="Script" uid="uid://cimw3ngq52vw3" path="res://worldspace/player/player.gd" id="1_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://cnv5mgt17h0yw" path="res://assets/blocked-character-walk.png" id="2_yw30f"]
@@ -22,7 +22,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 6.0
 }, {
@@ -39,7 +39,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 6.0
 }]
@@ -50,29 +50,28 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(18, 11.734375)
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" unique_id=1754688979]
 script = ExtResource("1_g1dw6")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=40840278]
 texture_filter = 1
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
 animation = &"idle"
 
-[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
+[node name="PlayerHitbox" type="CollisionShape2D" parent="." unique_id=1310226723]
 shape = SubResource("RectangleShape2D_g2els")
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1247774136]
 position = Vector2(0, 8)
 
-[node name="InteractionHitbox" type="CollisionShape2D" parent="InteractionArea"]
+[node name="InteractionHitbox" type="CollisionShape2D" parent="InteractionArea" unique_id=203971677]
 shape = SubResource("RectangleShape2D_qhqgy")
 
-[node name="Sprite2D" type="Sprite2D" parent="InteractionArea"]
-visible = false
+[node name="Sprite2D" type="Sprite2D" parent="InteractionArea" unique_id=342392059]
 position = Vector2(0, 8.940697e-08)
 scale = Vector2(0.09190708, -0.058290184)
 texture = ExtResource("3_qjkh3")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1266008257]
 zoom = Vector2(3, 3)

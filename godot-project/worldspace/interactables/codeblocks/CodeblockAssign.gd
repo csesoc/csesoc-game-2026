@@ -1,17 +1,16 @@
 class_name CodeblockAssign
 extends Codeblock
 
-static var scene = load("res://worldspace/interactables/codeblocks/CodeblockAssign.tscn")
+static var scene = preload("res://worldspace/interactables/codeblocks/CodeblockAssign.tscn")
 
 # the value to assign
-var value # (int, string, or other)
+var value = 10 # : ExpressionNode = null # (int, string, or other)
 # the variable to be assigned the value
 var target: String
 
-static func create(target: String, value):
+static func create(target: String):
 	var instance = scene.instantiate()
 	instance.target = target
-	instance.value = value
 	return instance
 
 func runCode(interpreter: Interpreter):

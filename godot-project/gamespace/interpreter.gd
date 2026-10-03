@@ -15,9 +15,8 @@ static func getInstance() -> Interpreter:
 		instance = Interpreter.new()
 	return instance
 
+# doesnt reset.
 func run_program(program: Array[Codeblock]):
-	resetState()
-	
 	for block in program:
 		block.runCode(self)
 		print(variables)

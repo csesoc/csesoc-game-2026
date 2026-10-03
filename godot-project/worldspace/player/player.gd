@@ -72,18 +72,22 @@ func _input(event: InputEvent):
 		facingRotation = deg_to_rad(0)
 		
 	if event.is_action_pressed("primary interact"):
+		print("player tried to interact")
 		if heldObject != null:
+			print("while already holding object")
 			heldObject.playerInteract.emit(self)
 			return
 		
+		# TODO | sort by range
 		for interactable in interactablesInRange:
 			interactable.playerInteract.emit(self)
+			break
 			
 func onPickupObject(object: Node2D):
 	object.position = Vector2(0, -20)
 	add_child(object)
 	heldObject = object
-	speed = 50
+	speed = 90
 
 func onDropObject(object):
 	remove_child(object)
