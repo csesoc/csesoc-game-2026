@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cl3j2cp2tewpg"]
+
+[ext_resource type="PackedScene" uid="uid://cyqqujrqyibxl" path="res://worldspace/interactables/codefactory.tscn" id="1_4cmen"]
+[ext_resource type="Script" uid="uid://dqceimak8cqly" path="res://worldspace/interactables/codeblocks/CodeblockAssign.gd" id="2_p0aw5"]
+
+[node name="Codeblock" unique_id=1573427484 instance=ExtResource("1_4cmen")]
+script = ExtResource("2_p0aw5")
+
+[node name="TextEdit" parent="." index="2" unique_id=141631934]
+text = "let x be x"

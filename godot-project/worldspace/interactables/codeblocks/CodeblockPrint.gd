@@ -1,7 +1,7 @@
 class_name CodeblockPrint
 extends Codeblock
 
-static var scene = preload("res://worldspace/interactables/codeblocks/CodeblockPrint.tscn")
+static var scene = load("res://worldspace/interactables/codeblocks/CodeblockPrint.tscn")
 
 # the value to print
 var value # (int, string, or variable)

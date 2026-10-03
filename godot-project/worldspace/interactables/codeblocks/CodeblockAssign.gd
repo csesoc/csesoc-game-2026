@@ -1,7 +1,7 @@
 class_name CodeblockAssign
 extends Codeblock
 
-static var scene = preload("res://worldspace/interactables/codeblocks/CodeblockAssign.tscn")
+static var scene = load("res://worldspace/interactables/codeblocks/CodeblockAssign.tscn")
 
 # the value to assign
 var value = 10 # : ExpressionNode = null # (int, string, or other)
