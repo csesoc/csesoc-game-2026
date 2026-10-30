@@ -5,12 +5,13 @@ extends CharacterBody2D
 @onready var interaction_hitbox = $InteractionArea
 
 @export var speed: float = 100
-var facingDirection: Vector2
-var facingRotation: float
-@export var HITBOX_DIST: int = 8
+var facingDirection: Vector2 # the last facing direction
+
+const HITBOX_DIST: int = 8
 
 var heldObject
 
+# player interactable 
 var interactablesInRange: Array[Interactable] = [];
 
 signal pickupObject(object)
@@ -24,7 +25,7 @@ func _ready() -> void:
 	dropObject.connect(onDropObject)
 
 func _physics_process(delta: float) -> void:
-	var direction = get_direction()
+	var direction = getDirection()
 	velocity = direction * speed
 	
 	move_and_slide()
@@ -36,8 +37,12 @@ func _process(delta: float) -> void:
 	else:
 		animated_sprite.play("idle")
 
-	interaction_hitbox.position = HITBOX_DIST * facingDirection
-	interaction_hitbox.rotation = facingRotation
+	# set facing direction
+	var direction = getDirection()
+	if direction != Vector2(0, 0):
+		interaction_hitbox.position = HITBOX_DIST * direction
+		interaction_hitbox.rotation = getRotation() + PI / 2
+		facingDirection = direction
 
 func _on_interaction_enter(body: Node2D):
 	if body is not Interactable:
@@ -55,22 +60,6 @@ func _on_interaction_exit(body: Node2D):
 
 # input handler
 func _input(event: InputEvent):
-	if event.is_action_pressed("move left"):
-		facingDirection = Vector2(-1, 0)
-		facingRotation = deg_to_rad(-90)
-		
-	if event.is_action_pressed("move right"):
-		facingDirection = Vector2(1, 0)
-		facingRotation = deg_to_rad(90)
-		
-	if event.is_action_pressed("move up"):
-		facingDirection = Vector2(0, -1)
-		facingRotation = deg_to_rad(180)
-		
-	if event.is_action_pressed("move down"):
-		facingDirection = Vector2(0, 1)
-		facingRotation = deg_to_rad(0)
-		
 	if event.is_action_pressed("primary interact"):
 		print("player tried to interact")
 		if heldObject != null:
@@ -91,14 +80,14 @@ func onPickupObject(object: Node2D):
 
 func onDropObject(object):
 	remove_child(object)
-	object.position = position + facingDirection * 20
+	object.position = position + facingDirection * 100
 	heldObject = null
 	speed = 100
 
 # HELPERS
 # =============================================================================
 # helper function to get the direction of the player input
-func get_direction() -> Vector2:
+func getDirection() -> Vector2:
 	var direction = Vector2(0, 0)
 	if Input.is_action_pressed("move left"):
 		direction += Vector2(-1, 0)
@@ -110,7 +99,8 @@ func get_direction() -> Vector2:
 		direction += Vector2(0, 1)
 	
 	direction = direction.normalized();
-	#print(direction)
-	#print(position)
 	return direction;
 		
+func getRotation() -> float:
+	var direction = getDirection()
+	return direction.angle()

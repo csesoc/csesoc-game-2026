@@ -5,7 +5,6 @@ extends Interactable
 
 @onready var textBlock = $TextEdit
 @onready var pickupComponent: PlayerPickupComponent = $PlayerPickupComponent
-@onready var collisionShape: CollisionShape2D = $CollisionShape2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,12 +18,10 @@ func _process(delta: float) -> void:
 
 # pickup functionality
 func onPickup():
-	scale /= 2
-	collisionShape.call_deferred("disabled", true)
+	pass
 	
 func onDrop():
-	scale *= 2
-	collisionShape.call_deferred("disabled", false)
+	pass
 
 func onPlayerInteract(player: Player):
 	if pickupComponent.isPlayerAttached():

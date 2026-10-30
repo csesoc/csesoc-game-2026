@@ -2,6 +2,9 @@
 class_name PlayerPickupComponent
 extends Node2D
 
+@onready
+var parent: Interactable = get_parent()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -11,10 +14,16 @@ func _process(delta: float) -> void:
 	pass
 	
 func getPickedUp(player: Player):
+	# disable hitbox first
+	parent.getCollisionShape().set_deferred("disabled", true)
+	
 	# reparent and tell player to pick up
 	var object = get_parent()
 	World.getWorld().remove_child(object)
 	player.pickupObject.emit(object)
+	
+	# make smaller scale
+	object.scale = Vector2(0.5, 0.5)
 	
 	if object.has_method("onPickup"):
 		object.onPickup()
@@ -26,10 +35,16 @@ func getDropped(player: Player):
 	player.dropObject.emit(object)
 	World.getWorld().add_child(object)
 	
+	# rescale to normal
+	object.scale = Vector2(1, 1)
+	
 	if object.has_method("onDrop"):
 		object.onDrop()
 	else:
 		defaultOnDrop()
+		
+	# enable hitbox last
+	parent.getCollisionShape().set_deferred("disabled", false)
 	
 func defaultOnPickup():
 	var object = get_parent()

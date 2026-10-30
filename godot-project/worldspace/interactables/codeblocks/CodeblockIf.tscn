@@ -1,10 +1,25 @@
 [gd_scene format=3 uid="uid://cl3j2cp2tewpg"]
 
-[ext_resource type="PackedScene" uid="uid://cyqqujrqyibxl" path="res://worldspace/interactables/codefactory.tscn" id="1_4cmen"]
-[ext_resource type="Script" uid="uid://dqceimak8cqly" path="res://worldspace/interactables/codeblocks/CodeblockAssign.gd" id="2_p0aw5"]
+[ext_resource type="Script" uid="uid://ca8jk14ow4od6" path="res://worldspace/interactables/codeblocks/CodeblockIf.gd" id="1_4cmen"]
+[ext_resource type="Script" uid="uid://b83bksvwk3gsh" path="res://worldspace/interactables/PlayerPickupComponent.gd" id="2_p0aw5"]
 
-[node name="Codeblock" unique_id=1573427484 instance=ExtResource("1_4cmen")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq4o1"]
+size = Vector2(171, 131.125)
+
+[node name="Codeblock" type="StaticBody2D" unique_id=1573427484]
+script = ExtResource("1_4cmen")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1554757667]
+position = Vector2(0, 6.4375)
+shape = SubResource("RectangleShape2D_yq4o1")
+
+[node name="PlayerPickupComponent" type="Node2D" parent="." unique_id=282065732]
 script = ExtResource("2_p0aw5")
 
-[node name="TextEdit" parent="." index="2" unique_id=141631934]
+[node name="TextEdit" type="TextEdit" parent="." unique_id=141631934]
+offset_left = -86.0
+offset_top = -60.0
+offset_right = 85.0
+offset_bottom = 71.0
 text = "let x be x"
+placeholder_text = "factory"

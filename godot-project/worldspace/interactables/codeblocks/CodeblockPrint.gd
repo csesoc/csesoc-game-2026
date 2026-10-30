@@ -4,7 +4,7 @@ extends Codeblock
 static var scene = load("res://worldspace/interactables/codeblocks/CodeblockPrint.tscn")
 
 # the value to print
-var value # (int, string, or variable)
+var value: ExpressionNode # (int, string, or variable)
 
 static func create(value):
 	var instance = scene.instantiate()
@@ -16,9 +16,9 @@ func runCode(interpreter: Interpreter):
 	#print(value)
 	#print(interpreter.variables["score"])
 	print("printing: ")
-	print(interpreter.parse(value))
+	print(value.evaluateString())
 	print()
-	interpreter.output.append(interpreter.parse(value))
+	interpreter.output.append(value.evaluateString())
 	print(interpreter.output)
 	interpreter.steps += 1
 	

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c8u0cpygd46v3"]
+
+[ext_resource type="Script" uid="uid://dmw2bexguqq4n" path="res://worldspace/interactables/expressions/ExpressionValue.gd" id="1_1flao"]
+[ext_resource type="Script" uid="uid://b83bksvwk3gsh" path="res://worldspace/interactables/PlayerPickupComponent.gd" id="2_823ne"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq4o1"]
+size = Vector2(171, 131.125)
+
+[node name="ExpressionValue" type="StaticBody2D" unique_id=2110746740]
+script = ExtResource("1_1flao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1554757667]
+position = Vector2(0, 6.4375)
+shape = SubResource("RectangleShape2D_yq4o1")
+
+[node name="PlayerPickupComponent" type="Node2D" parent="." unique_id=282065732]
+script = ExtResource("2_823ne")
+
+[node name="TextEdit" type="TextEdit" parent="." unique_id=141631934]
+offset_left = -86.0
+offset_top = -60.0
+offset_right = 85.0
+offset_bottom = 71.0
+text = "print codeblock"
+placeholder_text = "factory"

@@ -7,7 +7,7 @@ func _ready():
 
 func test_set_variable():
 	var program: Array[Codeblock] = [
-		CodeblockAssign.create("score")
+		CodeblockAssign.create("score").attach(ExpressionValue.create(10))
 		#CodeblockPrint.create("score")
 	]
 

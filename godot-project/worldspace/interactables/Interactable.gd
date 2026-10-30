@@ -3,6 +3,8 @@
 class_name Interactable
 extends Node2D
 
+@onready var collisionShape = $CollisionShape2D
+
 signal enteredTnteractRange
 signal exitedInteractRange
 signal playerInteract(player: Player)
@@ -16,6 +18,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+func getCollisionShape():
+	return collisionShape
 
 @abstract func onPlayerInteract(player: Player)
 func onEnterInteractRange():

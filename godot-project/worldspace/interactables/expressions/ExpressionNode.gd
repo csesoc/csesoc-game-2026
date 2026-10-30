@@ -5,8 +5,6 @@ extends Interactable
 
 @onready var textBlock = $TextEdit
 @onready var pickupComponent: PlayerPickupComponent = $PlayerPickupComponent
-@onready var collisionShape: CollisionShape2D = $CollisionShape2D
-
 
 # static var scene = preload("res://worldspace/interactables/codeblocks/CodeblockAssign.tscn")
 
@@ -18,20 +16,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-@abstract
-func evaluate()
-
-
-@abstract func runCode(interpreter: Interpreter) -> void
-
-# pickup functionality
-func onPickup():
-	scale /= 2
-	collisionShape.call_deferred("disabled", true)
-	
-func onDrop():
-	scale *= 2
-	collisionShape.call_deferred("disabled", false)
+@abstract func evaluate()
+@abstract func evaluateString()
+@abstract func evaluateBoolean()
 
 func onPlayerInteract(player: Player):
 	if pickupComponent.isPlayerAttached():
